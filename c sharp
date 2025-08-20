@@ -1,0 +1,249 @@
+1.
+
+
+1. .NET Framework Architecture
+
+When explaining to a colleague unfamiliar with .NET:
+
+CLR (Common Language Runtime)
+
+Execution engine of .NET
+
+Manages memory, garbage collection, exceptions, and thread management
+
+Provides security (Code Access Security)
+
+FCL (Framework Class Library)
+
+Collection of reusable classes, interfaces, and types
+
+Examples: System.IO for file handling, System.Net for networking
+
+Application Domains
+
+Logical isolation of .NET applications within a process
+
+Prevents one app from crashing another
+
+👉 Think of CLR as the "engine", FCL as the "toolbox", and Application Domain as the "safe room" where your app runs.
+
+2. Key Runtime Concepts
+
+CLR → The execution environment (like JVM in Java).
+
+CTS (Common Type System) → Defines how data types are declared and used (e.g., int in C#, Integer in VB.NET → treated the same way).
+
+CLS (Common Language Specification) → A subset of CTS ensuring cross-language interoperability (C#, VB.NET, F# can share code).
+
+👉 Example: If a C# library is shared with VB.NET, CLS ensures compatibility.
+
+3. Assemblies in .NET
+
+Definition: Assemblies are the building blocks of .NET applications. They contain compiled code (IL), metadata, and resources.
+
+Types:
+
+DLL (Dynamic Link Library) → Reusable components
+
+EXE → Executable application
+
+👉 Example scenario:
+
+UI layer in App.UI.dll
+
+Business logic in App.Business.dll
+
+Data Access in App.Data.dll
+
+Deployment = copy assemblies → CLR loads them.
+
+4. Namespaces
+
+Used to organize classes and avoid conflicts.
+
+namespace Project.Data
+{
+    class Employee { }
+}
+
+namespace Project.UI
+{
+    class Employee { }
+}
+
+
+👉 Even though both classes are Employee, namespaces prevent conflicts.
+
+5. Primitive Types vs Reference Types
+
+Primitive types (e.g., int, double, char) → Stored on the stack, hold the actual value.
+
+Reference types (e.g., class, object, string) → Store a reference (pointer) to heap memory.
+
+👉 Example:
+
+int a = 10; // value stored directly
+string s = "Hello"; // reference to heap memory
+
+6. Value Types vs Reference Types
+
+Value Types (struct, int, float) → copied directly.
+
+Reference Types (class, array, string) → copy references.
+
+👉 Example:
+
+int x = 5;
+int y = x; // copy → independent
+y = 10;   // does not affect x
+
+class Person { public string Name; }
+Person p1 = new Person();
+Person p2 = p1; // reference copy
+p2.Name = "John"; // affects p1 also
+
+7. Type Conversions
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int num = 10;
+        double d = num;  // Implicit (safe conversion)
+
+        double pi = 3.14;
+        int truncated = (int)pi;  // Explicit (requires cast)
+
+        Console.WriteLine("Implicit int->double: " + d);
+        Console.WriteLine("Explicit double->int: " + truncated);
+    }
+}
+
+8. Positive, Negative, or Zero
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int num = -5;
+        if (num > 0)
+            Console.WriteLine("Positive");
+        else if (num < 0)
+            Console.WriteLine("Negative");
+        else
+            Console.WriteLine("Zero");
+    }
+}
+
+9. Switch-Case Weekday
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int day = 3;
+        switch (day)
+        {
+            case 1: Console.WriteLine("Monday"); break;
+            case 2: Console.WriteLine("Tuesday"); break;
+            case 3: Console.WriteLine("Wednesday"); break;
+            case 4: Console.WriteLine("Thursday"); break;
+            case 5: Console.WriteLine("Friday"); break;
+            default: Console.WriteLine("Invalid"); break;
+        }
+    }
+}
+
+10. Nested If-Else + Switch
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int num = 14;
+
+        if (num % 2 == 0)
+            Console.WriteLine("Even");
+        else
+            Console.WriteLine("Odd");
+
+        switch (num)
+        {
+            case int n when (n >= 0 && n <= 10):
+                Console.WriteLine("Range: 0-10"); break;
+            case int n when (n >= 11 && n <= 20):
+                Console.WriteLine("Range: 11-20"); break;
+            default:
+                Console.WriteLine("Out of range"); break;
+        }
+    }
+}
+
+11. Fibonacci Series with For Loop
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int n = 10, first = 0, second = 1, next;
+
+        Console.Write(first + " " + second + " ");
+        for (int i = 2; i < n; i++)
+        {
+            next = first + second;
+            Console.Write(next + " ");
+            first = second;
+            second = next;
+        }
+    }
+}
+
+
+👉 Loop iterates to compute next number = sum of previous two.
+
+12. While vs Do-While
+
+While → checks condition before executing.
+
+Do-While → executes at least once, then checks condition.
+
+// While
+int i = 0;
+while (i < 3)
+{
+    Console.WriteLine("While Loop " + i);
+    i++;
+}
+
+// Do-While
+int j = 0;
+do
+{
+    Console.WriteLine("Do-While Loop " + j);
+    j++;
+} while (j < 3);
+
+13. Pyramid Pattern
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int rows = 5;
+
+        for (int i = 1; i <= rows; i++)
+        {
+            for (int space = 1; space <= rows - i; space++)
+                Console.Write(" ");
+            for (int star = 1; star <= 2 * i - 1; star++)
+                Console.Write("*");
+            Console.WriteLine();
+        }
+    }
+}
