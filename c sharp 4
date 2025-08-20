@@ -1,0 +1,102 @@
+1.Generic storage class
+
+using System;
+
+public class Storage<T>
+{
+    public T Item { get; set; }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Storage<int> intStorage = new Storage<int>();
+        intStorage.Item = 100;
+        Console.WriteLine("Stored Integer: " + intStorage.Item);
+
+        Storage<string> stringStorage = new Storage<string>();
+        stringStorage.Item = "Hello Generics!";
+        Console.WriteLine("Stored String: " + stringStorage.Item);
+
+        Storage<double> doubleStorage = new Storage<double>();
+        doubleStorage.Item = 99.99;
+        Console.WriteLine("Stored Double: " + doubleStorage.Item);
+    }
+}
+
+Question 2. Generic pair class
+ 
+using System;
+
+public class Pair<T1, T2>
+{
+    public T1 First { get; set; }
+    public T2 Second { get; set; }
+
+    public void PrintPair()
+    {
+        Console.WriteLine("First: " + First + ", Second: " + Second);
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Pair<int, string> pair1 = new Pair<int, string>();
+        pair1.First = 1;
+        pair1.Second = "One";
+        pair1.PrintPair();
+
+        Pair<string, double> pair2 = new Pair<string, double>();
+        pair2.First = "Price";
+        pair2.Second = 199.99;
+        pair2.PrintPair();
+    }
+}
+
+Question 3: Generic Calculator Class
+
+using System;
+
+public class Calculator<T>
+{
+    public T Add(T a, T b)
+    {
+        return (dynamic)a + (dynamic)b;
+    }
+
+    public T Subtract(T a, T b)
+    {
+        return (dynamic)a - (dynamic)b;
+    }
+
+    public T Multiply(T a, T b)
+    {
+        return (dynamic)a * (dynamic)b;
+    }
+
+    public T Divide(T a, T b)
+    {
+        return (dynamic)a / (dynamic)b;
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Calculator<int> intCalc = new Calculator<int>();
+        Console.WriteLine("Int Add: " + intCalc.Add(10, 5));
+        Console.WriteLine("Int Subtract: " + intCalc.Subtract(10, 5));
+        Console.WriteLine("Int Multiply: " + intCalc.Multiply(10, 5));
+        Console.WriteLine("Int Divide: " + intCalc.Divide(10, 5));
+
+        Calculator<double> doubleCalc = new Calculator<double>();
+        Console.WriteLine("Double Add: " + doubleCalc.Add(10.5, 5.2));
+        Console.WriteLine("Double Subtract: " + doubleCalc.Subtract(10.5, 5.2));
+        Console.WriteLine("Double Multiply: " + doubleCalc.Multiply(10.5, 5.2));
+        Console.WriteLine("Double Divide: " + doubleCalc.Divide(10.5, 5.2));
+    }
+}
