@@ -1,0 +1,342 @@
+using System;
+
+namespace Experiments
+{
+    class UserProfile
+    {
+        private string username;
+        private string password;
+        private string email;
+
+        public string Username
+        {
+            get { return username; }
+            set { username = value; }
+        }
+
+        public string Password
+        {
+            get { return password; }
+            set
+            {
+                if (value.Length >= 6)
+                    password = value;
+                else
+                    Console.WriteLine("Password must be at least 6 characters.");
+            }
+        }
+
+        public string Email
+        {
+            get { return email; }
+            set
+            {
+                if (value.Contains("@"))
+                    email = value;
+                else
+                    Console.WriteLine("Invalid email format.");
+            }
+        }
+
+        public void Display()
+        {
+            Console.WriteLine($"Username: {username}, Email: {email}");
+        }
+    }
+
+    class Exp1
+    {
+        public static void Run()
+        {
+            UserProfile user1 = new UserProfile();
+            user1.Username = "JohnDoe";
+            user1.Password = "12345"; // Invalid
+            user1.Password = "securePass";
+            user1.Email = "johnexample.com"; // Invalid
+            user1.Email = "john@example.com";
+            user1.Display();
+
+            Console.WriteLine();
+
+            UserProfile user2 = new UserProfile();
+            user2.Username = "JaneSmith";
+            user2.Password = "mypassword";
+            user2.Email = "jane@example.com";
+            user2.Display();
+        }
+    }
+}
+
+Password must be at least 6 characters.
+Invalid email format.
+Username: JohnDoe, Email: john@example.com
+
+Username: JaneSmith, Email: jane@example.com
+
+
+2.namespace Experiments
+{
+    class Vehicle
+    {
+        public string Make { get; set; }
+        public string Model { get; set; }
+        public int Year { get; set; }
+    }
+
+    class Truck : Vehicle
+    {
+        public void DisplayDetails()
+        {
+            Console.WriteLine($"Truck: {Make} {Model} ({Year})");
+        }
+    }
+
+    class Bus : Vehicle
+    {
+        public void DisplayDetails()
+        {
+            Console.WriteLine($"Bus: {Make} {Model} ({Year})");
+        }
+    }
+
+    class Exp2
+    {
+        public static void Run()
+        {
+            Truck t = new Truck { Make = "Volvo", Model = "FH16", Year = 2022 };
+            Bus b = new Bus { Make = "Mercedes", Model = "Tourismo", Year = 2021 };
+
+            t.DisplayDetails();
+            b.DisplayDetails();
+        }
+    }
+}
+
+Truck: Volvo FH16 (2022)
+Bus: Mercedes Tourismo (2021)
+
+3.namespace Experiments
+{
+    class Calculator
+    {
+        public int Add(int a, int b) => a + b;
+        public float Add(float a, float b) => a + b;
+        public double Add(double a, double b, double c) => a + b + c;
+    }
+
+    class Exp3
+    {
+        public static void Run()
+        {
+            Calculator calc = new Calculator();
+            Console.WriteLine($"Add(int, int): {calc.Add(5, 10)}");
+            Console.WriteLine($"Add(float, float): {calc.Add(5.5f, 4.5f)}");
+            Console.WriteLine($"Add(double, double, double): {calc.Add(1.1, 2.2, 3.3)}");
+        }
+    }
+}
+
+Add(int, int): 15
+Add(float, float): 10
+Add(double, double, double): 6.6
+
+4.namespace Experiments
+{
+    abstract class Employee
+    {
+        public string Name { get; set; }
+        public abstract double CalculateSalary();
+    }
+
+    class FullTimeEmployee : Employee
+    {
+        public double MonthlySalary { get; set; }
+        public override double CalculateSalary() => MonthlySalary;
+    }
+
+    class PartTimeEmployee : Employee
+    {
+        public double HourlyRate { get; set; }
+        public int HoursWorked { get; set; }
+        public override double CalculateSalary() => HourlyRate * HoursWorked;
+    }
+
+    class Exp4
+    {
+        public static void Run()
+        {
+            FullTimeEmployee fte = new FullTimeEmployee { Name = "John", MonthlySalary = 5000 };
+            PartTimeEmployee pte = new PartTimeEmployee { Name = "Jane", HourlyRate = 20, HoursWorked = 80 };
+
+            Console.WriteLine($"{fte.Name} Salary: {fte.CalculateSalary()}");
+            Console.WriteLine($"{pte.Name} Salary: {pte.CalculateSalary()}");
+        }
+    }
+}
+
+John Salary: 5000
+Jane Salary: 1600
+
+5.namespace Experiments
+{
+    class Student
+    {
+        public string Name { get; set; }
+        public int RollNumber { get; set; }
+        public double Marks { get; set; }
+
+        public Student() { }
+        public Student(string name, int roll) { Name = name; RollNumber = roll; }
+        public Student(string name, int roll, double marks) { Name = name; RollNumber = roll; Marks = marks; }
+
+        public void Display()
+        {
+            Console.WriteLine($"Name: {Name}, Roll: {RollNumber}, Marks: {Marks}");
+        }
+    }
+
+    class Exp5
+    {
+        public static void Run()
+        {
+            Student s1 = new Student();
+            Student s2 = new Student("John", 101);
+            Student s3 = new Student("Jane", 102, 88.5);
+
+            s1.Display();
+            s2.Display();
+            s3.Display();
+        }
+    }
+}
+
+Name: , Roll: 0, Marks: 0
+Name: John, Roll: 101, Marks: 0
+Name: Jane, Roll: 102, Marks: 88.5
+
+6.namespace Experiments
+{
+    class Product
+    {
+        public int ProductID { get; set; }
+        public string ProductName { get; set; }
+        private double price;
+        public double Price
+        {
+            get => price;
+            set
+            {
+                if (value >= 0)
+                    price = value;
+                else
+                    Console.WriteLine("Price cannot be negative.");
+            }
+        }
+        public int Quantity { get; set; }
+
+        public void Display()
+        {
+            Console.WriteLine($"ID: {ProductID}, Name: {ProductName}, Price: {Price}, Qty: {Quantity}");
+        }
+    }
+
+    class Exp6
+    {
+        public static void Run()
+        {
+            Product p1 = new Product { ProductID = 1, ProductName = "Laptop", Price = 55000, Quantity = 5 };
+            Product p2 = new Product { ProductID = 2, ProductName = "Phone", Price = -200, Quantity = 10 };
+
+            p1.Display();
+            p2.Display();
+        }
+    }
+}
+
+ID: 1, Name: Laptop, Price: 55000, Qty: 5
+Price cannot be negative.
+ID: 2, Name: Phone, Price: 0, Qty: 10
+
+7.using System.Collections.Generic;
+
+namespace Experiments
+{
+    class Book
+    {
+        public string Title { get; set; }
+        public bool IsAvailable { get; set; } = true;
+    }
+
+    class Member
+    {
+        public string Name { get; set; }
+    }
+
+    class Library
+    {
+        public List<Book> Books = new List<Book>();
+        public List<Member> Members = new List<Member>();
+
+        public void RegisterMember(string name)
+        {
+            Members.Add(new Member { Name = name });
+            Console.WriteLine($"Member '{name}' registered.");
+        }
+
+        public void AddBook(string title)
+        {
+            Books.Add(new Book { Title = title });
+            Console.WriteLine($"Book '{title}' added.");
+        }
+
+        public void LendBook(string title, string memberName)
+        {
+            Book book = Books.Find(b => b.Title == title && b.IsAvailable);
+            if (book != null)
+            {
+                book.IsAvailable = false;
+                Console.WriteLine($"Book '{title}' lent to {memberName}.");
+            }
+            else
+            {
+                Console.WriteLine($"Book '{title}' is not available.");
+            }
+        }
+
+        public void ShowAvailableBooks()
+        {
+            Console.WriteLine("Available Books:");
+            foreach (var book in Books)
+            {
+                if (book.IsAvailable)
+                    Console.WriteLine(book.Title);
+            }
+        }
+    }
+
+    class Exp7
+    {
+        public static void Run()
+        {
+            Library lib = new Library();
+            lib.RegisterMember("John");
+            lib.RegisterMember("Jane");
+
+            lib.AddBook("C# Basics");
+            lib.AddBook("OOP in Depth");
+
+            lib.LendBook("C# Basics", "John");
+            lib.ShowAvailableBooks();
+        }
+    }
+}
+Member 'John' registered.
+Member 'Jane' registered.
+Book 'C# Basics' added.
+Book 'OOP in Depth' added.
+Book 'C# Basics' lent to John.
+Available Books:
+OOP in Depth
+
+
+
