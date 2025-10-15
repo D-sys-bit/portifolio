@@ -347,4 +347,21 @@ public static void CheckSalary()
 //C. Ignoring the exception 
 //D. Retrying code execution
 //ANS:-B
+//18.Which block is optional in try-catch-finally structure?
+//A. try B. catch C. finally D.Both B and C
+//ANS:-D
+
+//19.What will happen if both try and finally blocks have return statements ?
+//A. try’s return executes
+//B. finally’s return overrides try’s
+//C.Both execute sequentially
+//D.Compile - time error
+//ANS:-B
+
+//20.Which of the following statements about custom exceptions is correct? 
+//A. Must inherit from Exception or ApplicationException 
+//B. Cannot include constructors 
+//C. Cannot be thrown 
+//D. Handled only by CLR
+//ANS:-A
 
